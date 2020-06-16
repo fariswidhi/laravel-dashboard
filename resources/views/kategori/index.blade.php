@@ -1,0 +1,93 @@
+@extends('index')
+@section('title')
+<h1>{{@$title}}</h1>
+@endsection
+
+@section('content')
+
+
+
+<div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">{{@$title}}</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{@$title}}</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+          <!-- Card stats -->
+         
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+       
+      
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Barang Data</h3>
+                </div>
+                <div class="col text-right">
+                  <button data-title="Tambah Data" data-src="{{url('kategori/create')}}" class="btn btn-primary create-btn btn-sm">Create</button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+             
+<table class="table table-striped" id="table">
+  <thead>
+    <th>id</th>
+<th>nama_kategori</th>
+
+  
+    <th>Options</th>
+  </thead>
+
+  <tbody>
+  </tbody>
+</table>
+
+            </div>
+          </div>
+        </div>
+       
+      </div>
+
+      @endsection
+
+@push('scripts')
+<script>
+
+$(function() {
+    $('#table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! url(Request::segment(env('SEGMENT')).'/json') !!}',
+        columns: [
+         {data:'id',name:'id'},
+{data:'nama_kategori',name:'nama_kategori'},
+{data:'action',name:'action'}
+     
+        ]
+    });
+});
+
+
+</script>
+@endpush
+
